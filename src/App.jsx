@@ -7,7 +7,7 @@ const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
 function App() {
   // list of desired attributes to obtain from API
-  const attributes = [
+  const ATTRIBUTES = [
     "breed_group",
     "weight",
     "height",
@@ -34,12 +34,13 @@ function App() {
 
     // Get necessary data
     const data = response.data[0];
+    console.log(data);
     
     // Extract the attributes we want and return a dog object with those 
     // properties
     const extractAttributes = ({breeds: [info], url}) => {
       const dog = {};
-      attributes.map(attribute => {
+      ATTRIBUTES.map(attribute => {
         if (typeof info[attribute] == "object") {
           dog[attribute] = info[attribute]["imperial"];
         } else {
@@ -47,6 +48,7 @@ function App() {
         }
       });
       dog["url"] = url;
+      console.log(dog);
       return dog;
     }
 
