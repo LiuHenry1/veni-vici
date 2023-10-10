@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import axios from 'axios';
+import DisplayCard from './components/DisplayCard';
 
 const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
@@ -38,9 +39,14 @@ function App() {
     // properties
     const extractAttributes = ({breeds: [info], url}) => {
       const dog = {};
-      attributes.map(attribute => dog[attribute] = info[attribute]);
+      attributes.map(attribute => {
+        if (typeof info[attribute] == "object") {
+          dog[attribute] = info[attribute]["imperial"];
+        } else {
+          dog[attribute] = info[attribute];
+        }
+      });
       dog["url"] = url;
-      
       return dog;
     }
 
@@ -54,6 +60,7 @@ function App() {
     <>
     <h1>Dog Overdose</h1>
     <h4>Discover dogs of every kind!</h4>
+    {currentDog ? <DisplayCard dog={currentDog} /> : <div></div>}
     <button onClick={callAPI}>Discover!</button>
     </>
   )
