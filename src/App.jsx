@@ -11,9 +11,7 @@ function App() {
     "breed_group",
     "weight",
     "height",
-    "name",
     "life_span",
-    "temperament"
   ]
 
   const [currentDog, setDog] = useState(null);
@@ -38,18 +36,22 @@ function App() {
     
     // Extract the attributes we want and return a dog object with those 
     // properties
-    const extractAttributes = ({breeds: [info], url}) => {
-      const dog = {};
+    const extractAttributes = ({breeds: [{name, ...info}], url}) => {
+      const dog = {
+        name: name,
+        url: url,
+        attributes: {},
+      }
+
       ATTRIBUTES.map(attribute => {
         if (typeof info[attribute] == "object") {
-          dog[attribute] = info[attribute]["imperial"];
+          dog["attributes"][attribute] = info[attribute]["imperial"];
         } else {
-          dog[attribute] = info[attribute];
+          dog["attributes"][attribute] = info[attribute];
         }
       });
-      dog["url"] = url;
-      console.log(dog);
       return dog;
+
     }
 
     const newDog = extractAttributes(data);
