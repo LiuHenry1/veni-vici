@@ -8,8 +8,8 @@ const DisplayCard = ({ dog, handleClick }) => {
   };
 
   return (
-    <>
-      <h3>{dog.name}</h3>
+    <div className="display-card">
+      <h2>{dog.name}</h2>
       <div className="attribute-container">
         {Object.entries(dog.attributes).map(([key, value]) => {
           if (value != undefined) {
@@ -25,7 +25,7 @@ const DisplayCard = ({ dog, handleClick }) => {
         })}
       </div>
       <img src={dog.url} width="600px" height="500px" />
-    </>
+    </div>
   );
 };
 
