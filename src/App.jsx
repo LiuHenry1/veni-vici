@@ -66,7 +66,7 @@ function App() {
     }
 
     const newDog = extractAttributes(data);
-    setDog(newDog);
+    return newDog;
   }
 
   const addToBan = (e) => {
@@ -80,6 +80,25 @@ function App() {
     setBan(newBannedAttributes);
   }
 
+  const validDog = (dog) => {
+    for (const attribute in dog.attributes) {
+      console.log(attribute);
+      if (bannedAttributes[attribute].includes(dog.attributes[attribute])) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  const getDog = async() =>  {
+    let dog;
+    do {
+      dog = await callAPI();
+    } while (!validDog(dog))
+
+    setDog(dog);
+  }
+
 
   return (
     // Starter template
@@ -87,7 +106,7 @@ function App() {
     <h1>Dog Overdose</h1>
     <h4>Discover dogs of every kind!</h4>
     {currentDog ? <DisplayCard dog={currentDog} handleClick={addToBan}/> : <div></div>}
-    <button onClick={callAPI}>Discover!</button>
+    <button onClick={getDog}>Discover!</button>
     </>
   )
 }
