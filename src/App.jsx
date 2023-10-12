@@ -15,6 +15,12 @@ function App() {
   ]
 
   const [currentDog, setDog] = useState(null);
+  const [bannedAttributes, setBan] = useState({
+    breed_group: [],
+    weight: [],
+    height: [],
+    life_span: []
+  });
 
   const callAPI = async() => {
     // Fetch only data that has breed data attached
@@ -45,7 +51,12 @@ function App() {
 
       ATTRIBUTES.map(attribute => {
         if (typeof info[attribute] == "object") {
-          dog["attributes"][attribute] = info[attribute]["imperial"];
+          if (attribute === "weight") {
+            dog["attributes"][attribute] = info[attribute]["imperial"] + "lbs"
+          } else {
+            dog["attributes"][attribute] = info[attribute]["imperial"] + "in"
+          }
+          
         } else {
           dog["attributes"][attribute] = info[attribute];
         }
@@ -58,13 +69,24 @@ function App() {
     setDog(newDog);
   }
 
+  const addToBan = (e) => {
+    const attribute = e.target.getAttribute("data-attribute");
+    const value = e.target.getAttribute("data-value");
+    const newBannedAttributes = {
+      ...bannedAttributes,
+      [attribute]: [...bannedAttributes[attribute], value]
+    };
+    console.log(newBannedAttributes);
+    setBan(newBannedAttributes);
+  }
+
 
   return (
     // Starter template
     <>
     <h1>Dog Overdose</h1>
     <h4>Discover dogs of every kind!</h4>
-    {currentDog ? <DisplayCard dog={currentDog} /> : <div></div>}
+    {currentDog ? <DisplayCard dog={currentDog} handleClick={addToBan}/> : <div></div>}
     <button onClick={callAPI}>Discover!</button>
     </>
   )
