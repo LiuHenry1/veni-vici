@@ -40,7 +40,6 @@ function App() {
 
     // Get necessary data
     const data = response.data[0];
-    console.log(data);
     
     // Extract the attributes we want and return a dog object with those 
     // properties
@@ -79,13 +78,11 @@ function App() {
       ...bannedAttributes,
       [attribute]: [...bannedAttributes[attribute], value]
     };
-    console.log(newBannedAttributes);
     setBan(newBannedAttributes);
   }
 
   const validDog = (dog) => {
     for (const attribute in dog.attributes) {
-      console.log(attribute);
       if (bannedAttributes[attribute].includes(dog.attributes[attribute])) {
         return false;
       }
