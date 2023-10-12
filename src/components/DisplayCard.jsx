@@ -16,7 +16,9 @@ const DisplayCard = ({ dog, handleClick }) => {
             return (
               <div className="attribute">
                 <h4>{displayRepr[key]}</h4>
-                <button onClick={handleClick}>{value}</button>
+                <button data-attribute={key} data-value={value} onClick={handleClick}>
+                  {value}
+                </button>
               </div>
             );
           }
