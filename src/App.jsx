@@ -12,6 +12,7 @@ function App() {
     "weight",
     "height",
     "life_span",
+    "origin"
   ]
 
   const [currentDog, setDog] = useState(null);
@@ -19,7 +20,8 @@ function App() {
     breed_group: [],
     weight: [],
     height: [],
-    life_span: []
+    life_span: [],
+    origin: []
   });
 
   const callAPI = async() => {
@@ -42,10 +44,11 @@ function App() {
     
     // Extract the attributes we want and return a dog object with those 
     // properties
-    const extractAttributes = ({breeds: [{name, ...info}], url}) => {
+    const extractAttributes = ({breeds: [{name, temperament, ...info}], url}) => {
       const dog = {
         name: name,
         url: url,
+        temperament: temperament,
         attributes: {},
       }
 
