@@ -106,7 +106,7 @@ function App() {
     <h1>Dog Overdose</h1>
     <h4>Discover dogs of every kind!</h4>
     {currentDog ? <DisplayCard dog={currentDog} handleClick={addToBan}/> : <div></div>}
-    <button onClick={getDog}>Discover!</button>
+    <button id="next-button" onClick={getDog}>Discover!</button>
     </>
   )
 }
