@@ -1,21 +1,39 @@
 #root {
   height: 100%;
   width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
+  margin: 0;
   text-align: center;
-}
-
-.card {
-  padding: 2em;
 }
 
 #next-button {
   margin-top: 2rem;
 }
 
-.read-the-docs {
-  color: #888;
+.container {
+  display: flex;
+  min-width: 950px;
+  width: 100%;
+  height: 100%;
+}
+
+.main {
+  flex: 1 0 max(85%, 750px);
+}
+
+.banned-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  gap: 10px;
+  background-color: rgba(179, 6, 6, 0.432);
+  flex: 1 1 200px;
+  border-left: 1px solid black;
+}
+
+.banned-list > button {
+  width: max(55%, 100px);
+  text-align: center;
 }
 
 .display-card {
