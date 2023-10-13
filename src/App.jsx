@@ -41,7 +41,7 @@ function App() {
     // Extract the attributes we want and return a dog object with those
     // properties
     const extractAttributes = ({
-      breeds: [{ name, temperament, ...info }],
+      breeds: [{ name, temperament, ...attributes }],
       url,
     }) => {
       const dog = {
@@ -52,14 +52,14 @@ function App() {
       };
 
       ATTRIBUTES.map((attribute) => {
-        if (typeof info[attribute] == "object") {
+        if (typeof attributes[attribute] == "object") {
           if (attribute === "weight") {
-            dog["attributes"][attribute] = info[attribute]["imperial"] + "lbs";
+            dog["attributes"][attribute] = attributes[attribute]["imperial"] + "lbs";
           } else {
-            dog["attributes"][attribute] = info[attribute]["imperial"] + "in";
+            dog["attributes"][attribute] = attributes[attribute]["imperial"] + "in";
           }
         } else {
-          dog["attributes"][attribute] = info[attribute];
+          dog["attributes"][attribute] = attributes[attribute];
         }
       });
       return dog;
@@ -92,7 +92,6 @@ function App() {
       ...bannedAttributes,
       [attribute]: bannedAttributes[attribute].filter(curVal => curVal != value)
     };
-    console.log(newBannedAttributes);
     setBan(newBannedAttributes);
   }
 
@@ -115,7 +114,6 @@ function App() {
   };
 
   return (
-    // Starter template
     <div className="container">
       <div className="main">
         <h1>Dog Overdose</h1>
