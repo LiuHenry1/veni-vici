@@ -29,7 +29,7 @@ const DisplayCard = ({ dog, handleClick }) => {
           }
         })}
       </div>
-      <img src={dog.url} width="500px" height="400px" />
+      <img src={dog.url} width="500px" height="300px" />
       <p>{dog.temperament}</p>
     </div>
   );
